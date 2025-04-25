@@ -3,11 +3,11 @@ session_start();
 
 // Vérification que l'utilisateur est connecté
 if (!isset($_SESSION['utilisateur_id'])) {
-    echo "Utilisateur non connecté"; // Affichage pour débogage
+    echo "Utilisateur non connecté"; 
     header("Location: connexion.php");
     exit();
 } else {
-    echo "Utilisateur connecté: " . $_SESSION['utilisateur_id']; // Affichage pour débogage
+    echo "Utilisateur connecté: " . $_SESSION['utilisateur_id']; 
 }
 
 
@@ -26,7 +26,7 @@ if ($conn->connect_error) {
 }
 
 // Récupération des données du formulaire
-$utilisateur_id = $_SESSION['utilisateur_id']; // Assurez-vous que l'ID de l'utilisateur est bien défini
+$utilisateur_id = $_SESSION['utilisateur_id']; 
 $nom = $conn->real_escape_string($_POST['nom']);
 $prenom = $conn->real_escape_string($_POST['prenom']);
 $age = (int)$_POST['age'];
@@ -49,13 +49,13 @@ $sql = "INSERT INTO rendezvous (utilisateur_id, nom, prenom, age, poids, sexe, t
 // Exécution de la requête
 if ($conn->query($sql) === TRUE) {
     // Rediriger l'utilisateur vers la page de ses rendez-vous
-    header("Location: mes_rendezvous.php"); // Modifiez selon la page souhaitée
+    header("Location: mes_rendezvous.php"); 
     exit();
 } else {
     // En cas d'erreur
     echo "Erreur: " . $sql . "<br>" . $conn->error;
 }
 
-// Fermer la connexion
+
 $conn->close();
 ?>

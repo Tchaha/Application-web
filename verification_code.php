@@ -7,8 +7,6 @@ if (!isset($_SESSION['code_2fa'])) {
     exit();
 }
 ?>
-
-<!-- Formulaire pour entrer le code -->
 <form action="verifier_code.php" method="post">
     <label for="code">Entrez le code que vous avez reçu par email :</label>
     <input type="text" id="code" name="code" required>

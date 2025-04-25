@@ -9,10 +9,10 @@ session_start();
     <title>Réserver un rendez-vous – ZenTime</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- FullCalendar CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
 
-    <!-- FontAwesome + Ton CSS -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     
@@ -58,7 +58,7 @@ session_start();
 </head>
 <body>
 
-<!-- Menu -->
+
 <div class="menu_bar">
     <h1 class="logo">Zen<span>Time</span> - Bonjour <?php echo htmlspecialchars($_SESSION['utilisateur']); ?> !</h1>
     <ul>
@@ -79,7 +79,7 @@ session_start();
     </ul>
 </div>
 
-<!-- Contenu principal -->
+
 <div class="contenu">
     <h2 style="text-align: center;">Réservez votre créneau</h2>
     <p style="text-align: center;">Choisissez une disponibilité dans le calendrier ci-dessous.</p>
@@ -87,7 +87,7 @@ session_start();
     <div id="calendar" style="max-width: 900px; margin: 0 auto; padding: 20px;"></div>
 </div>
 
-<!-- Footer -->
+
 <footer>
     <p>&copy; 2025 ZenTime. Tous droits réservés.</p>
     <p>Contactez-nous : +1 819-290-38-46</p>

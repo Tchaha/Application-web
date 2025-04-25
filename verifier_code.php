@@ -2,13 +2,13 @@
 session_start();
 
 if (isset($_POST['code']) && $_POST['code'] == $_SESSION['code_2fa']) {
-    // Marquer l'utilisateur comme connecté
+  
     $_SESSION['connecté'] = true;
 
-    // Charger les infos utilisateur depuis l'email enregistré en session
+
     $email = $_SESSION['user_email'];
 
-    // Connexion à la base de données
+   
     $conn = new mysqli("localhost", "tchahafankouah25_ecrire", "Abitibitch22", "tchahafankouah25_zentime");
     if ($conn->connect_error) {
         die("Connexion échouée : " . $conn->connect_error);
@@ -21,7 +21,7 @@ if (isset($_POST['code']) && $_POST['code'] == $_SESSION['code_2fa']) {
     $user = $result->fetch_assoc();
 
     if ($user) {
-        $_SESSION['user'] = $user; // ✅ Enregistre l'utilisateur dans la session
+        $_SESSION['user'] = $user; 
         header("Location: user.php");
         exit();
     } else {
