@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zentime</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Plein écran pour la vidéo */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .video {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        #background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .video-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+        }
+
+        .menu_bar {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 20px;
+            z-index: 10;
+        }
+
+        .menu_bar .logo {
+            color: white;
+            font-size: 24px;
+        }
+
+        .menu_bar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu_bar ul li {
+            position: relative;
+        }
+
+        .menu_bar a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            top: 30px;
+            right: 0;
+            min-width: 180px;
+            z-index: 15;
+        }
+
+        .dropdown-content li {
+            padding: 10px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            text-align: center;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="menu_bar">
+        <h1 class="logo">Zen<span>Time</span></h1>
+        <ul>
+            <!-- Menu unique regroupant tout -->
+            <li class="dropdown">
+                <a href="#">Menu <i class="fa fa-caret-down"></i></a>
+                <ul class="dropdown-content">
+                    <li><a href="connexion.php">Se connecter</a></li>
+                    <li><a href="inscription.php">Créer un compte</a></li>
+                    <li><a href="tel:+18192903846"><i class="fa fa-phone"></i> +1 819-290-38-46</a></li>
+                    <li><a href="mailto:contact@zentime.com"><i class="fa fa-envelope"></i> contact@zentime.com</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="video">
+        <video id="background-video" autoplay loop muted>
+            <source src="back2.mp4" type="video/mp4">
+        </video>
+        <div class="video-content">
+            <h2 class="logo">Bienvenue sur Zen<span>Time</span></h2>
+            <p>Votre plateforme de bien-être et de santé.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 ZenTime. Tous droits réservés.</p>
+    </footer>
+
+    <script src="dom.js" type="module"></script>
+</body>
+</html>

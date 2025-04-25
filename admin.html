@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zentime</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="menu_bar">
+        <h1 class="logo">Zen<span>Time</span></h1>
+        <ul>
+            <li><a href="">Contactez-nous</a></li>
+            <li><a href="">Se déconnecter <i class="fa-regular fa-circle-user"></i></i></a></li>
+        </ul>
+    </div>
+
+    <div class="video">
+        <video id="background-video" autoplay loop muted>
+            <source src="back2.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+        <div class="video-content">
+            <h2 class="logo">Bienvenue sur Zen<span>Time</span></h2>
+            <p>Votre plateforme de bien-être et de santé.</p>
+        </div>
+    </div>
+
+    <section class="services">
+        <div class="services-container" id="services-container">
+            <div class="service">
+                <i class="fas fa-calendar-alt"></i>
+                <p>services</p>
+                <a href="ajouter_disponibilite.html" class="btn">Planifier son horaire</a>
+            </div>
+            <div class="service">
+                <i class="fas fa-calendar-check"></i>
+                <p>services</p>
+                <a href="consultation.php" class="btn">liste de rendez-vous  </a>
+            </div>
+
+            <div class="service">
+                <i class="fas fa-file-alt"></i>
+                <p>services</p>
+                <a href="consultation.php" class="btn">Historiques rendez-vous  </a>
+            </div>
+           
+    </section>
+
+    <footer>
+        <p>&copy; 2025 ZenTime. Tous droits réservés.</p>
+        <p>Contactez-nous : +1 819-290-38-46</p>
+        <nav>
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#a-propos">À propos</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script src="dom.js" type="module"></script>
+</body>
+</html>

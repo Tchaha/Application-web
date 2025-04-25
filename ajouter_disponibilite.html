@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter des disponibilités – ZenTime</title>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #calendar {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .save-button {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .confirmation-dialog {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dialog-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .dialog-box button {
+            margin: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Ajouter vos disponibilités</h1>
+
+<div id="calendar"></div>
+
+<div style="text-align: center;">
+    <button class="save-button" onclick="enregistrerDisponibilites()">Transmettre</button>
+    <a href="admin.html"><button class="save-button">Bureau</button></a>
+</div>
+
+<div id="confirmationDialog" class="confirmation-dialog">
+    <div class="dialog-box">
+        <p>Voulez-vous supprimer cette disponibilité ?</p>
+        <button class="confirm" onclick="supprimerDisponibilite()">Oui</button>
+        <button class="cancel" onclick="fermerDialog()">Non</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+<script>
+    let disponibilites = [];
+    let eventToDelete = null;
+    let calendar;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const calendarEl = document.getElementById('calendar');
+
+        calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'timeGridWeek',
+            locale: 'fr',
+            selectable: true,
+            nowIndicator: true,
+            allDaySlot: false,
+            slotDuration: '01:00:00',
+            slotMinTime: '08:00:00',
+            slotMaxTime: '20:00:00',
+            slotMinHeight: 100, // <-- Case agrandies ici
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'timeGridDay,timeGridWeek,dayGridMonth'
+            },
+            select: function (info) {
+                const end = new Date(info.start);
+                end.setHours(end.getHours() + 1);
+
+                const event = calendar.addEvent({
+                    title: "Disponible",
+                    start: info.start,
+                    end: end,
+                    allDay: false
+                });
+
+                disponibilites.push({
+                    title: "Disponible",
+                    start: info.start.toISOString(),
+                    end: end.toISOString()
+                });
+
+                calendar.unselect();
+            },
+            eventClick: function (info) {
+                eventToDelete = info.event;
+                afficherDialog();
+            }
+        });
+
+        calendar.render();
+    });
+
+    function enregistrerDisponibilites() {
+        if (disponibilites.length === 0) {
+            alert("Aucune disponibilité à enregistrer.");
+            return;
+        }
+
+        fetch('ajouter_dispo.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(disponibilites)
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert("Disponibilités transmises avec succès !");
+            console.log(data);
+            disponibilites = [];
+        })
+        .catch(error => {
+            alert("Erreur d'enregistrement.");
+            console.error(error);
+        });
+    }
+
+    function afficherDialog() {
+        document.getElementById('confirmationDialog').style.display = 'flex';
+    }
+
+    function fermerDialog() {
+        document.getElementById('confirmationDialog').style.display = 'none';
+    }
+
+    function supprimerDisponibilite() {
+        if (eventToDelete) {
+            disponibilites = disponibilites.filter(d =>
+                d.start !== eventToDelete.start.toISOString() || d.end !== eventToDelete.end.toISOString()
+            );
+            eventToDelete.remove();
+        }
+        fermerDialog();
+    }
+</script>
+</body>
+</html>
